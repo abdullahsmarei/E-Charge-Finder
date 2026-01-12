@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | E-Charge Finder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-charging-station"></i> E-Charge<span>Finder</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Find Stations</a>
+                <a href="login.html">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PROJ-1: Registration Form -->
+    <div class="container">
+        <div class="auth-wrapper">
+            <div class="page-header">
+                <h2>Create Account</h2>
+                <p>Join the EV community</p>
+            </div>
+            
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" class="form-control" required placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" required placeholder="john@example.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" required placeholder="Min 6 characters">
+                </div>
+
+                <div id="register-error" class="error-msg"></div>
+
+                <button type="submit" class="btn-block">Register</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html" style="color: var(--primary-color);">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 E-Charge Finder.</p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Stations | E-Charge Finder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-charging-station"></i> E-Charge<span>Finder</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Find Stations</a>
+                
+                <!-- Guest Nav (Visible when not logged in) -->
+                <div id="nav-guest" style="display: flex; gap: 1rem; align-items: center;">
+                    <a href="login.html">Login</a>
+                    <a href="register.html" class="btn-nav btn-primary">Sign Up</a>
+                </div>
+
+                <!-- User Nav (Visible when logged in) -->
+                <div id="nav-user" style="display: none; gap: 1rem; align-items: center;">
+                    <span style="font-size: 0.9rem; color: var(--text-muted);">
+                        Hi, <span id="user-name-display" style="font-weight: bold; color: var(--primary-color);">User</span>
+                    </span>
+                    <a href="profile.html">Profile</a>
+                    <a href="#" id="logout-btn" style="color: var(--danger-color); font-weight: 500;">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area (ID required for JS routing) -->
+    <div id="home-page" class="container">
+        
+        <!-- Header & Intro -->
+        <div class="page-header">
+            <h1>Find a Charging Station</h1>
+            <p>Real-time availability for EV chargers near you.</p>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-bar-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="search-input" class="search-input" placeholder="Search by area, name, or address...">
+        </div>
+
+        <!-- Stations Grid (Populated by JS) -->
+        <div id="stations-grid" class="stations-grid">
+            <!-- 
+                Content is injected here by main.js using App.stationsLogic.render()
+                Loading state or fallback content can go here initially 
+            -->
+            <div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">
+                <i class="fas fa-spinner fa-spin fa-2x"></i>
+                <p style="margin-top: 1rem;">Loading stations...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 E-Charge Finder. All rights reserved.</p>
+    </footer>
+
+    <!-- Application Logic -->
+    <script src="js/main.js"></script>
+</body>
+</html>
