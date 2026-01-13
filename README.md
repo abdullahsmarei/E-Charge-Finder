@@ -1,14 +1,14 @@
-E-Charge Finder (Sprint 1)
+E-Charge Finder 
 
 A frontend-only web application for finding EV charging stations.
 
-Features (Sprint 1)
+Features 
 
-PROJ-1 User Management: Register, Login, and Edit Profile (Data saved in LocalStorage).
+User Management: Register, Login, and Edit Profile (Data saved in LocalStorage).
 
-PROJ-2 Station Search: Filter charging stations by location/area.
+Station Search: Filter charging stations by location/area.
 
-PROJ-3 Real-Time Simulation: Station availability updates automatically to simulate real-world usage.
+Real-Time Simulation: Station availability updates automatically to simulate real-world usage.
 
 Project Structure
 
@@ -45,17 +45,17 @@ Stay on index.html.
 
 Watch the progress bars on station cards change colors and numbers every 3 seconds.
 
-E-Charge Finder (Sprint 2 - V0.2)
+E-Charge Finder 
 
 A modern, frontend-only web application for locating EV charging stations with real-time simulations.
 
-New Features (Sprint 2)
+New Features
 
-PROJ-4: Advanced Filtering: Filter stations by Charger Type (Fast/Normal), Speed (kW), Price Range, and Distance. Results update dynamically.
+ Advanced Filtering: Filter stations by Charger Type (Fast/Normal), Speed (kW), Price Range, and Distance. Results update dynamically.
 
-PROJ-5: Enhanced Availability UI: Real-time updates every 3 seconds with pulsing visual indicators, color-coded status bars (Green/Yellow/Red), and improved animations.
+ Enhanced Availability UI: Real-time updates every 3 seconds with pulsing visual indicators, color-coded status bars (Green/Yellow/Red), and improved animations.
 
-PROJ-6: Personalization:
+ Personalization:
 
 Favorites: Mark stations as favorites to see them on your profile.
 
@@ -82,3 +82,4 @@ Search and filter for stations on the home page.
 Register/Login to unlock "Favorite" and "Charge" buttons on station cards.
 
 Visit your Profile to view your saved history and favorites.
+
