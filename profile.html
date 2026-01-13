@@ -5,69 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile | E-Charge Finder</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <i class="fas fa-charging-station"></i> E-Charge<span>Finder</span>
+                <i class="fas fa-bolt"></i> E-Charge<span>Finder</span>
             </a>
             <div class="nav-links">
                 <a href="index.html">Find Stations</a>
-                <div id="nav-user" style="display: flex; gap: 1rem; align-items: center;">
-                    <a href="profile.html" class="active">Profile</a>
-                    <a href="#" id="logout-btn" style="color: var(--danger-color);">Logout</a>
-                </div>
+                <a href="profile.html" class="active">My Profile</a>
+                <a href="#" id="logout-btn" class="btn-danger"><i class="fas fa-sign-out-alt"></i></a>
             </div>
         </div>
     </nav>
 
-    <!-- PROJ-1: Profile Management -->
-    <div class="container">
-        <div class="auth-wrapper" style="max-width: 600px;">
-            <div class="page-header" style="text-align: left; display: flex; align-items: center; gap: 1rem;">
-                <i class="fas fa-user-circle" style="font-size: 3rem; color: var(--primary-color);"></i>
-                <div>
-                    <h2 style="font-size: 1.8rem; margin:0;">My Profile</h2>
-                    <p style="margin:0;">Manage your personal details</p>
+    <div class="profile-container">
+        <div class="profile-grid">
+            <!-- User Info Card -->
+            <div class="profile-card">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                    <div style="width: 80px; height: 80px; background: var(--primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 2rem; color: var(--primary-dark);">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h2 id="display-name">Loading...</h2>
+                    <p id="display-email" style="color: var(--text-muted); font-size: 0.9rem;">email@example.com</p>
+                </div>
+
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="p-name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Vehicle Model</label>
+                        <input type="text" id="p-vehicle" class="form-control" placeholder="Tesla Model Y">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%; justify-content: center;">Update Profile</button>
+                </form>
+            </div>
+
+            <!-- PROJ-6: History & Favorites -->
+            <div class="activity-card">
+                <div style="display:flex; border-bottom: 1px solid var(--border); margin-bottom: 1.5rem;">
+                    <button class="btn btn-outline" style="border:none; border-bottom: 2px solid var(--primary); border-radius: 0;">History</button>
+                    <button class="btn btn-outline" style="border:none; border-radius: 0;">Favorites</button>
+                </div>
+
+                <div id="history-section">
+                    <h3>Recent Charges</h3>
+                    <ul class="history-list" id="history-list">
+                        <!-- History loaded by main.js -->
+                    </ul>
+                </div>
+
+                <div id="favorites-section" style="margin-top: 2rem;">
+                    <h3>My Favorite Stations</h3>
+                    <div id="favorites-grid" class="stations-grid" style="grid-template-columns: 1fr; margin-top: 1rem;">
+                        <!-- Favorites loaded by main.js -->
+                    </div>
                 </div>
             </div>
-            
-            <form id="profile-form">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div class="form-group">
-                        <label for="p-name">Full Name</label>
-                        <input type="text" id="p-name" class="form-control" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="p-email">Email (Read Only)</label>
-                        <input type="email" id="p-email" class="form-control" readonly style="background-color: #f3f4f6;">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="p-vehicle">Vehicle Model</label>
-                        <input type="text" id="p-vehicle" class="form-control" placeholder="e.g. Tesla Model 3">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="p-phone">Phone Number</label>
-                        <input type="tel" id="p-phone" class="form-control" placeholder="+1 234 567 8900">
-                    </div>
-                </div>
-
-                <div style="margin-top: 1rem; text-align: right;">
-                    <button type="submit" class="btn-block" style="width: auto; padding-left: 2rem; padding-right: 2rem;">Save Changes</button>
-                </div>
-            </form>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2024 E-Charge Finder.</p>
-    </footer>
 
     <script src="js/main.js"></script>
 </body>

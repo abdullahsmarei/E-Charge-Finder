@@ -5,54 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | E-Charge Finder</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body style="background: var(--dark-bg); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 1rem;">
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <i class="fas fa-charging-station"></i> E-Charge<span>Finder</span>
+    <div style="background: var(--white); padding: 2.5rem 2rem; border-radius: var(--radius-md); width: 100%; max-width: 420px; box-shadow: var(--shadow-lg);">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <a href="index.html" class="logo" style="font-size: 2.1rem; justify-content: center; display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem;">
+                <i class="fas fa-bolt" style="color: var(--primary);"></i> E-Charge<span>Finder</span>
             </a>
-            <div class="nav-links">
-                <a href="index.html">Find Stations</a>
-            </div>
+            <h2 style="margin: 0 0 0.5rem;">Welcome Back</h2>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">Sign in to find your next charge</p>
         </div>
-    </nav>
 
-    <!-- PROJ-1: Login Form -->
-    <div class="container">
-        <div class="auth-wrapper">
-            <div class="page-header">
-                <h2>Welcome Back</h2>
-                <p>Login to manage your profile</p>
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" class="form-control" required placeholder="name@company.com">
             </div>
-            
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" class="form-control" required placeholder="Enter your email">
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" class="form-control" required placeholder="Enter your password">
-                </div>
 
-                <div id="login-error" class="error-msg"></div>
-
-                <button type="submit" class="btn-block">Sign In</button>
-            </form>
-
-            <div class="auth-footer">
-                <p>Don't have an account? <a href="register.html" style="color: var(--primary-color);">Register here</a></p>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" required placeholder="••••••••">
             </div>
-        </div>
+
+            <div id="login-error" class="error-msg" style="display: none;"></div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; font-size: 1.05rem; margin-top: 1rem;">
+                Sign In
+            </button>
+        </form>
+
+        <p style="text-align: center; margin-top: 1.8rem; font-size: 0.92rem; color: var(--text-muted);">
+            New to E-Charge Finder? 
+            <a href="register.html" style="color: var(--primary); font-weight: 600;">Create an account</a>
+        </p>
     </div>
-
-    <footer>
-        <p>&copy; 2024 E-Charge Finder.</p>
-    </footer>
 
     <script src="js/main.js"></script>
 </body>

@@ -3,327 +3,862 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Stations | E-Charge Finder</title>
+    <title>E-Charge Finder | Premium EV Charging Network</title>
     
-    <!-- Existing Styles -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- FontAwesome & Google Fonts -->
+    <!-- External Fonts and Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Enhanced Styles & Animations (Overrides) -->
     <style>
+        /* * ────────────────────────────────────────────────
+         * UNIFIED STYLESHEET (Based on your style.css)
+         * ────────────────────────────────────────────────
+         */
+
         :root {
+            /* Core Colors */
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #d1fae5;
             --primary-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            --glass-bg: rgba(255, 255, 255, 0.95);
-            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            
+            /* Backgrounds & Text */
+            --bg-main: #f8fafc;
+            --light-bg: #f0fdf4;
+            --dark-bg: #0f172a;
+            --white: #ffffff;
+            
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --text-light: #94a3b8;
+            
+            /* UI Effects */
+            --glass-bg: rgba(255, 255, 255, 0.90);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+            --shadow-md: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+            
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
         }
+
+        /* Base Resets */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f0fdf4; /* Very light green tint */
+            background: var(--light-bg);
             background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
-            background-size: 20px 20px;
+            background-size: 24px 24px;
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* --- Navbar Upgrade --- */
+        a { text-decoration: none; color: inherit; transition: color 0.2s; }
+        ul { list-style: none; }
+
+        /* ────────────────────────────────────────────────
+           Navigation (High End Glassmorphism)
+        ───────────────────────────────────────────────── */
         .navbar {
             background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.3);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
+            font-size: 1.5rem;
             font-weight: 800;
             letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-main);
         }
 
-        /* --- Hero Section (New) --- */
-        .hero {
+        .logo i {
+            color: var(--primary);
+            filter: drop-shadow(0 0 8px rgba(16,185,129,0.3));
+        }
+
+        .logo span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Desktop Nav */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
             position: relative;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.6rem 1.4rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16,185,129,0.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(16,185,129,0.35);
+        }
+
+        .btn-outline {
+            border: 1px solid #e2e8f0;
+            background: white;
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #f0fdf4;
+        }
+
+        /* Mobile Toggle */
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* ────────────────────────────────────────────────
+           Hero Section (Immersive)
+        ───────────────────────────────────────────────── */
+        .hero {
             background: var(--dark-bg);
             color: white;
-            padding: 4rem 2rem;
+            padding: 6rem 1.5rem 10rem; /* Extra padding bottom for overlap */
             text-align: center;
+            position: relative;
             overflow: hidden;
-            margin-bottom: -3rem; /* Overlap effect */
-            padding-bottom: 6rem;
+            margin-bottom: -6rem; /* Overlap effect */
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.3), transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.3), transparent 50%);
-            z-index: 0;
+            inset: -50%;
+            background: radial-gradient(circle at 30% 40%, rgba(16,185,129,0.2), transparent 60%),
+                        radial-gradient(circle at 70% 60%, rgba(59, 130, 246, 0.2), transparent 60%);
+            animation: pulse-bg 15s infinite alternate;
+            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             max-width: 800px;
             margin: 0 auto;
-            animation: slideDown 0.8s ease-out;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 1rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
             background: linear-gradient(to right, #ffffff, #a7f3d0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #d1d5db;
-            margin-bottom: 2rem;
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
         }
 
-        /* --- Dashboard Container --- */
-        .dashboard-container {
+        /* ────────────────────────────────────────────────
+           Main Layout & Filters
+        ───────────────────────────────────────────────── */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
             position: relative;
             z-index: 10;
-            max-width: 1200px;
-            margin: 0 auto 3rem auto;
-            padding: 0 1.5rem;
         }
 
-        /* --- Search Bar Upgrade --- */
+        /* Sidebar Styling */
+        .filters-sidebar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.6);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            padding: 1.75rem;
+            height: fit-content;
+            position: sticky;
+            top: 6rem;
+        }
+
+        .filter-section {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 1.5rem;
+        }
+
+        .filter-section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .filter-section h4 {
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Search Input */
         .search-wrapper {
-            background: white;
-            padding: 1rem;
-            border-radius: 1rem;
-            box-shadow: var(--glass-shadow);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            border: 1px solid rgba(0,0,0,0.05);
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .search-wrapper i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
         }
 
         .search-input {
-            border: none;
-            background: #f9fafb;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            padding: 1rem 1rem 1rem 3rem; /* icon spacing handled by padding */
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            background: #f8fafc;
+            transition: all 0.2s;
+            outline: none;
+            font-family: inherit;
         }
-        
+
         .search-input:focus {
             background: white;
-            box-shadow: inset 0 0 0 2px var(--primary-color);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
         }
 
-        .search-bar-container {
-            margin-bottom: 2rem;
-            max-width: 800px;
+        /* Controls */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            cursor: pointer;
+            color: var(--text-main);
+            transition: color 0.2s;
+        }
+
+        .checkbox-item:hover {
+            color: var(--primary-dark);
+        }
+
+        .checkbox-item input[type="checkbox"], 
+        .checkbox-item input[type="radio"] {
+            accent-color: var(--primary);
+            width: 1.1rem;
+            height: 1.1rem;
+            cursor: pointer;
+        }
+
+        /* ────────────────────────────────────────────────
+           Station Cards (Grid)
+        ───────────────────────────────────────────────── */
+        .stations-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: white; /* Because it sits on dark hero overlap initially */
         }
         
-        .search-icon {
-            z-index: 10;
-            color: var(--primary-color);
+        .stations-header h2 {
+            font-size: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* --- Station Card Upgrades --- */
+        .results-count {
+            background: rgba(255,255,255,0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            backdrop-filter: blur(4px);
+        }
+
         .stations-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
-        /* Note: JS generates .station-card, we style it here */
         .station-card {
-            background: white;
-            border: none !important;
-            border-radius: 1rem !important;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            animation: fadeInUp 0.5s ease-out forwards;
-            position: relative;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0,0,0,0.04);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
 
         .station-card:hover {
-            transform: translateY(-8px) !important;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(16,185,129,0.2);
         }
 
-        .card-header {
-            background: #ffffff !important;
-            border-bottom: 1px solid #f3f4f6 !important;
-            padding: 1.25rem !important;
-        }
-
-        .station-type {
-            background: #ecfdf5 !important;
-            color: #059669 !important;
-            border: 1px solid #d1fae5;
-            font-size: 0.7rem !important;
-            letter-spacing: 0.5px;
-        }
-
-        .card-body {
-            padding: 1.5rem !important;
-        }
-
-        .station-name {
-            color: #111827;
-            font-size: 1.15rem !important;
-        }
-
-        /* Live Indicator */
-        .availability-header span:last-child {
+        /* Card Image/Map Placeholder */
+        .card-visual {
+            height: 140px;
+            background: #e2e8f0;
             position: relative;
-            padding-left: 12px;
+            overflow: hidden;
         }
         
-        /* This simulates the 'live' pulsing dot next to availability numbers */
-        .availability-header span:last-child::before {
-            content: '';
+        .card-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .station-card:hover .card-visual img {
+            transform: scale(1.05);
+        }
+
+        /* Status Badge */
+        .card-badge {
             position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 1rem;
+            left: 1rem;
+            background: white;
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            z-index: 2;
+        }
+
+        .status-dot {
             width: 8px;
             height: 8px;
-            background-color: currentColor; /* Takes text color */
             border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 0 2px rgba(16,185,129,0.3);
             animation: pulse 2s infinite;
         }
 
-        .progress-bar {
-            background-color: #f3f4f6 !important;
-            height: 10px !important;
-            border-radius: 99px !important;
+        .badge-available .status-dot { background: var(--primary); }
+        .badge-busy .status-dot { background: var(--accent); animation: none; }
+        .badge-offline .status-dot { background: var(--danger); animation: none; }
+
+        /* Card Content */
+        .card-content {
+            padding: 1.25rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .progress-fill {
-            border-radius: 99px !important;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        .station-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--text-main);
         }
 
-        /* --- Animations --- */
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .station-address {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
         }
 
+        /* Tech Specs */
+        .specs-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1.25rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .spec-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .spec-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* Card Actions */
+        .card-actions {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-tag {
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 1rem;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.9rem;
+            font-size: 0.85rem;
+        }
+
+        /* ────────────────────────────────────────────────
+           Footer
+        ───────────────────────────────────────────────── */
+        footer {
+            background: var(--dark-bg);
+            color: #94a3b8;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            margin-top: auto;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a:hover { color: white; }
+
+        /* ────────────────────────────────────────────────
+           Animations
+        ───────────────────────────────────────────────── */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(25px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+            0%   { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+            70%  { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+            100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
         }
 
-        /* --- Loading State --- */
-        .loading-state {
-            grid-column: 1/-1;
-            background: white;
-            padding: 3rem;
-            border-radius: 1rem;
-            text-align: center;
-            box-shadow: var(--glass-shadow);
+        @keyframes pulse-bg {
+            from { opacity: 0.5; transform: scale(1); }
+            to   { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        /* ────────────────────────────────────────────────
+           Responsive Media Queries
+        ───────────────────────────────────────────────── */
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr; /* Stack sidebar on top */
+            }
+            
+            .filters-sidebar {
+                position: relative;
+                top: 0;
+                margin-bottom: 2rem;
+            }
+            
+            .stations-header {
+                color: var(--text-main);
+                text-shadow: none;
+                margin-top: 1rem;
+            }
+            
+            .results-count {
+                background: #e2e8f0;
+                color: var(--text-main);
+            }
+            
+            .hero {
+                margin-bottom: 0;
+                padding-bottom: 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Hide desktop menu */
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow-lg);
+                gap: 1rem;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero h1 { font-size: 2.25rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <i class="fas fa-bolt" style="color: var(--primary-color);"></i> E-Charge<span>Finder</span>
+                <i class="fas fa-bolt"></i>
+                E-Charge<span>Finder</span>
             </a>
-            <div class="nav-links">
-                <a href="index.html" class="active">Find Stations</a>
-                
-                <!-- Guest Nav (Logic handled by main.js) -->
-                <div id="nav-guest" style="display: flex; gap: 1rem; align-items: center;">
-                    <a href="login.html" style="font-weight: 600;">Login</a>
-                    <a href="register.html" class="btn-nav btn-primary" style="background: var(--primary-gradient); border:none;">Sign Up</a>
-                </div>
+            
+            <button class="mobile-toggle" aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
 
-                <!-- User Nav (Logic handled by main.js) -->
-                <div id="nav-user" style="display: none; gap: 1.5rem; align-items: center;">
-                    <span style="font-size: 0.9rem; color: var(--text-muted); background: white; padding: 0.5rem 1rem; border-radius: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                        <i class="fas fa-user-circle" style="margin-right: 5px;"></i>
-                        <span id="user-name-display" style="font-weight: bold; color: var(--primary-dark);">User</span>
-                    </span>
-                    <a href="profile.html">Profile</a>
-                    <a href="#" id="logout-btn" style="color: var(--danger-color); font-weight: 600;"><i class="fas fa-sign-out-alt"></i></a>
-                </div>
+            <div class="nav-links" id="nav-links">
+                <a href="index.html" class="nav-item active">Find Stations</a>
+                <a href="#" class="nav-item">Map View</a>
+                <a href="#" class="nav-item">Community</a>
+                
+                <div style="width: 1px; height: 20px; background: #e2e8f0; margin: 0 0.5rem;" class="divider"></div>
+                
+                <a href="login.html" class="nav-item">Log In</a>
+                <a href="register.html" class="btn btn-primary">Sign Up</a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content Wrapped for JS Logic -->
-    <div id="home-page">
-        
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Power Up Your Journey</h1>
-                <p>Locate available EV charging stations in real-time. Join the smartest network of electric vehicle drivers.</p>
-                <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 2rem; font-size: 0.9rem; color: rgba(255,255,255,0.7);">
-                    <span><i class="fas fa-check-circle" style="color: var(--primary-color);"></i> Real-time Updates</span>
-                    <span><i class="fas fa-check-circle" style="color: var(--primary-color);"></i> Smart Filtering</span>
-                    <span><i class="fas fa-check-circle" style="color: var(--primary-color);"></i> Free to Use</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Main Dashboard Interface -->
-        <div class="dashboard-container">
-            
-            <!-- Search Section -->
-            <div class="search-bar-container">
-                <div class="search-wrapper">
-                    <i class="fas fa-search search-icon" style="font-size: 1.2rem;"></i>
-                    <input type="text" id="search-input" class="search-input" placeholder="Search by area (e.g., 'Downtown'), name, or address...">
-                </div>
-            </div>
-
-            <!-- Stats / Info Bar (Visual Only) -->
-            <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem;">
-                <p>Live Status: <span style="color: var(--primary-color); font-weight: bold;">● Monitoring Network</span></p>
-                <p><i class="fas fa-filter"></i> Showing all available stations</p>
-            </div>
-
-            <!-- Stations Grid -->
-            <div id="stations-grid" class="stations-grid">
-                <!-- Fallback / Loading State -->
-                <div class="loading-state">
-                    <i class="fas fa-circle-notch fa-spin fa-3x" style="color: var(--primary-color); margin-bottom: 1rem;"></i>
-                    <h3>Connecting to Grid...</h3>
-                    <p style="color: var(--text-muted);">Fetching real-time station data.</p>
-                </div>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Power Your Journey</h1>
+            <p>Locate available high-speed EV chargers in real-time. Filter by speed, network, and price to find the perfect stop.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <button class="btn btn-primary btn-lg">Find Nearby</button>
+                <button class="btn btn-outline" style="background: transparent; color: white; border-color: rgba(255,255,255,0.3);">How it Works</button>
             </div>
         </div>
+    </header>
 
-    </div>
+    <!-- Main Content -->
+    <main class="main-layout">
+        
+        <!-- Sidebar Filters -->
+        <aside class="filters-sidebar">
+            <div class="filter-section">
+                <h4><i class="fas fa-search" style="margin-right:8px; color: var(--primary);"></i> Search Location</h4>
+                <div class="search-wrapper">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" class="search-input" placeholder="City, Zip, or Station Name">
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4>Charger Type</h4>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="checkbox" checked> 
+                        <span>DC Fast Charger (CCS)</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" checked> 
+                        <span>Tesla Supercharger</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox"> 
+                        <span>J1772 (Level 2)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <h4>Charging Speed</h4>
+                <div class="checkbox-group">
+                    <label class="checkbox-item">
+                        <input type="radio" name="speed" checked> 
+                        <span>Any Speed</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="radio" name="speed"> 
+                        <span>50 kW+ (Fast)</span>
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="radio" name="speed"> 
+                        <span>150 kW+ (Ultra-Fast)</span>
+                    </label>
+                </div>
+            </div>
+            
+            <button class="btn btn-outline" style="width: 100%; justify-content: center;">Reset Filters</button>
+        </aside>
+
+        <!-- Results Grid -->
+        <section>
+            <div class="stations-header">
+                <h2>Nearby Stations</h2>
+                <span class="results-count">12 Found</span>
+            </div>
+
+            <div class="stations-grid" id="stations-grid">
+                
+                <!-- Station Card 1 -->
+                <article class="station-card">
+                    <div class="card-visual">
+                        <div class="card-badge badge-available">
+                            <span class="status-dot"></span> Available
+                        </div>
+                        <!-- Placeholder for map/image -->
+                        <div style="width:100%; height:100%; background: linear-gradient(45deg, #e2e8f0 25%, #f1f5f9 25%, #f1f5f9 50%, #e2e8f0 50%, #e2e8f0 75%, #f1f5f9 75%, #f1f5f9 100%); background-size: 20px 20px; opacity: 0.5;"></div>
+                        <i class="fas fa-charging-station" style="position:absolute; bottom:10px; right:10px; font-size:2rem; color: white; opacity:0.8; drop-shadow: 0 2px 4px rgba(0,0,0,0.3);"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="station-title">Downtown Supercharger</div>
+                        <div class="station-address">
+                            <i class="fas fa-location-arrow"></i> 1.2 miles • 401 Union St
+                        </div>
+                        
+                        <div class="specs-row">
+                            <div class="spec-item">
+                                <span class="spec-label">Speed</span>
+                                <span class="spec-value" style="color:var(--primary-dark)">250 kW</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Plugs</span>
+                                <span class="spec-value">8 CCS</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-actions">
+                            <div class="price-tag">$0.32<span style="font-size:0.75rem; font-weight:400; color:#64748b">/kWh</span></div>
+                            <button class="btn btn-primary btn-sm">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Station Card 2 -->
+                <article class="station-card">
+                    <div class="card-visual">
+                        <div class="card-badge badge-busy">
+                            <span class="status-dot"></span> Busy
+                        </div>
+                        <div style="width:100%; height:100%; background: linear-gradient(45deg, #e2e8f0 25%, #f1f5f9 25%, #f1f5f9 50%, #e2e8f0 50%, #e2e8f0 75%, #f1f5f9 75%, #f1f5f9 100%); background-size: 20px 20px; opacity: 0.5;"></div>
+                        <i class="fas fa-bolt" style="position:absolute; bottom:10px; right:10px; font-size:2rem; color: white; opacity:0.8; drop-shadow: 0 2px 4px rgba(0,0,0,0.3);"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="station-title">Green Plaza Mall</div>
+                        <div class="station-address">
+                            <i class="fas fa-location-arrow"></i> 3.5 miles • 880 Fashion Valley
+                        </div>
+                        
+                        <div class="specs-row">
+                            <div class="spec-item">
+                                <span class="spec-label">Speed</span>
+                                <span class="spec-value" style="color:var(--secondary)">150 kW</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Plugs</span>
+                                <span class="spec-value">4 CCS, 2 CHAdeMO</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-actions">
+                            <div class="price-tag">$0.28<span style="font-size:0.75rem; font-weight:400; color:#64748b">/kWh</span></div>
+                            <button class="btn btn-primary btn-sm">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Station Card 3 -->
+                <article class="station-card">
+                    <div class="card-visual">
+                        <div class="card-badge badge-available">
+                            <span class="status-dot"></span> Available
+                        </div>
+                        <div style="width:100%; height:100%; background: linear-gradient(45deg, #e2e8f0 25%, #f1f5f9 25%, #f1f5f9 50%, #e2e8f0 50%, #e2e8f0 75%, #f1f5f9 75%, #f1f5f9 100%); background-size: 20px 20px; opacity: 0.5;"></div>
+                        <i class="fas fa-leaf" style="position:absolute; bottom:10px; right:10px; font-size:2rem; color: white; opacity:0.8; drop-shadow: 0 2px 4px rgba(0,0,0,0.3);"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="station-title">City Park Level 2</div>
+                        <div class="station-address">
+                            <i class="fas fa-location-arrow"></i> 0.5 miles • 101 Park Ave
+                        </div>
+                        
+                        <div class="specs-row">
+                            <div class="spec-item">
+                                <span class="spec-label">Speed</span>
+                                <span class="spec-value">7.2 kW</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Plugs</span>
+                                <span class="spec-value">12 J1772</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-actions">
+                            <div class="price-tag">Free<span style="font-size:0.75rem; font-weight:400; color:#64748b">/1hr</span></div>
+                            <button class="btn btn-primary btn-sm">Details</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer>
-        <div class="container" style="opacity: 0.8;">
-            <p>&copy; 2024 E-Charge Finder. Powered by Green Energy.</p>
-            <div style="margin-top: 0.5rem; font-size: 1.5rem; gap: 1rem; display: flex; justify-content: center;">
-                <i class="fab fa-twitter"></i>
-                <i class="fab fa-github"></i>
-                <i class="fab fa-instagram"></i>
+        <div class="footer-content">
+            <div class="logo" style="font-size: 1.2rem;">
+                <i class="fas fa-bolt"></i> E-Charge<span>Finder</span>
             </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p>© 2026 E-Charge Finder. Optimized for high-speed travel.</p>
         </div>
     </footer>
 
-    <!-- Application Logic -->
-    <script src="js/main.js"></script>
+    <!-- Mobile Nav Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.querySelector('.mobile-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            toggleBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                
+                // Change icon
+                const icon = toggleBtn.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
